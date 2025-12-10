@@ -32,4 +32,9 @@ export class BabyList implements OnInit {
     await this.supabaseService.updatePayment(baby.id, true);
     await this.loadBabies(); // reload list to reflect payment
   }
+
+  async refreshList() {
+    await this.supabaseService.loadBabies();
+  }
+
 }

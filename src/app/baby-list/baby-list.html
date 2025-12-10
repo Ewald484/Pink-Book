@@ -1,4 +1,6 @@
 <h1>Baby List</h1>
+
+<button (click)="refreshList()">Refresh</button>
 <button (click)="goToBabyForm()">Add New Baby</button>
 
 <table>
@@ -23,6 +25,7 @@
             <td>{{ baby.payment_received ? 'Yes' : 'No' }}</td>
             <td>
                 <button *ngIf="!baby.payment_received" (click)="markPayment(baby)">Mark Payment</button>
+                <span *ngIf="baby.payment_received">Paid</span>
             </td>
         </tr>
     </tbody>

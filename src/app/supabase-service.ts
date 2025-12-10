@@ -28,6 +28,10 @@ export class SupabaseService {
     return data;
   }
 
+  async loadBabies(): Promise<any[]> {
+    return this.getBabies();
+  }
+
   async addBaby(baby: any) {
     const { data, error } = await this.supabase.from('babies').insert([baby]);
     if (error) throw error;
