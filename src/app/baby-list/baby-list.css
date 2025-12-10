@@ -16,24 +16,6 @@ th {
     background-color: #f2f2f2;
 }
 
-table {
-    width: 90%;
-    margin: 30px auto;
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-}
-
-th,
-td {
-    padding: 12px 8px;
-    border: 1px solid #ccc;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
 tr.paid {
     background-color: #FFC0CB;
     /* pink for paid rows */
@@ -50,22 +32,4 @@ button {
 
 button:hover {
     background-color: #ff85c1;
-}
-
-tr.paid {
-    background-color: #a10079;
-    /* pink for paid */
-}
-
-button {
-    padding: 6px 12px;
-    background-color: #ac1010;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #d33302;
 }

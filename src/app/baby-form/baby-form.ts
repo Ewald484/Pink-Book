@@ -27,22 +27,21 @@ export class BabyForm {
   async submit(event: Event) {
     event.preventDefault();
 
-    // Auto-generate unique file_number if empty
+    // Auto-generate file_number
     if (!this.baby.file_number) {
       this.baby.file_number = 'BN-' + Date.now();
     }
 
-    // Format dates correctly for Supabase
+    // Format dates
     this.baby.date_of_birth = new Date(this.baby.date_of_birth).toISOString().split('T')[0];
     this.baby.hearing_test_date = new Date(this.baby.hearing_test_date).toISOString().split('T')[0];
 
     try {
-      const data = await this.supabaseService.addBaby(this.baby);
-      console.log('Baby added:', data);
-      this.router.navigate(['/baby-list']);
+      await this.supabaseService.addBaby(this.baby);
+      this.router.navigate(['/baby-list']); // go to list after adding
     } catch (error: any) {
-      console.error('Supabase insert error:', error);
-      alert('Failed to add baby. See console for details.');
+      console.error('Failed to add baby:', error);
+      alert('Failed to add baby. See console.');
     }
   }
 }

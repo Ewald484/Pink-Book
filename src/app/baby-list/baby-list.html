@@ -22,10 +22,7 @@
             <td>{{ baby.hearing_test_date }}</td>
             <td>{{ baby.payment_received ? 'Yes' : 'No' }}</td>
             <td>
-                <!-- Show the button only if payment is not received -->
                 <button *ngIf="!baby.payment_received" (click)="markPayment(baby)">Mark Payment</button>
-                <!-- Optional: show “Paid” text instead of hiding the row -->
-                <span *ngIf="baby.payment_received">Paid</span>
             </td>
         </tr>
     </tbody>
