@@ -1,20 +1,18 @@
-<form (submit)="SignUp()" autocomplete="new-password">
-    <h1>SignUp</h1>
+<h1>Sign Up</h1>
 
-    <div class="form-control">
-        <label for="email">FirstName</label>
-        <input id="FirstName" autocomplete="new-password" type="text">
-    </div>
+<form (submit)="signUp()">
+    <label>First Name:</label>
+    <input [(ngModel)]="user.first_name" name="first_name" required>
 
-    <div class="form-control">
-        <label for="email">Email</label>
-        <input id="email" autocomplete="new-password" type="email">
-    </div>
+    <label>Last Name:</label>
+    <input [(ngModel)]="user.last_name" name="last_name" required>
 
-    <div class="form-control">
-        <label for="password">Password</label>
-        <input id="password" autocomplete="new-password" type="password">
-    </div>
+    <label>Email:</label>
+    <input type="email" [(ngModel)]="user.email" name="email" required>
 
-    <button type="submit">SignUp &#8594;</button>
+    <button type="submit">Sign Up</button>
 </form>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a routerLink="/baby-list">Go to Baby List</a>
+</div>

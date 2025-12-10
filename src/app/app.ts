@@ -5,7 +5,7 @@ import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet, RouterLinkWithHref],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
   protected readonly title = signal('Pink-Book');

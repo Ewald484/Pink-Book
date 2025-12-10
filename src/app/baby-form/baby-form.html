@@ -1,1 +1,19 @@
-<p>baby-form works!</p>
+<h1>Add New Baby</h1>
+<form (submit)="submit($event)">
+    <label>File Number:</label>
+    <input [(ngModel)]="baby.file_number" name="file_number" placeholder="Leave blank to auto-generate">
+
+    <label>First Name:</label>
+    <input [(ngModel)]="baby.first_name" name="first_name" required>
+
+    <label>Last Name:</label>
+    <input [(ngModel)]="baby.last_name" name="last_name" required>
+
+    <label>Date of Birth:</label>
+    <input type="date" [(ngModel)]="baby.date_of_birth" name="date_of_birth" required>
+
+    <label>Hearing Test Date:</label>
+    <input type="date" [(ngModel)]="baby.hearing_test_date" name="hearing_test_date" required>
+
+    <button type="submit">Add Baby</button>
+</form>

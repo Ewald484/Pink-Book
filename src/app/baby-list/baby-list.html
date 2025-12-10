@@ -1,1 +1,32 @@
-<p>baby-list works!</p>
+<h1>Baby List</h1>
+<button (click)="goToBabyForm()">Add New Baby</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>File Number</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Hearing Test Date</th>
+            <th>Payment Received</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let baby of babies" [class.paid]="baby.payment_received">
+            <td>{{ baby.file_number }}</td>
+            <td>{{ baby.first_name }}</td>
+            <td>{{ baby.last_name }}</td>
+            <td>{{ baby.date_of_birth }}</td>
+            <td>{{ baby.hearing_test_date }}</td>
+            <td>{{ baby.payment_received ? 'Yes' : 'No' }}</td>
+            <td>
+                <!-- Show the button only if payment is not received -->
+                <button *ngIf="!baby.payment_received" (click)="markPayment(baby)">Mark Payment</button>
+                <!-- Optional: show “Paid” text instead of hiding the row -->
+                <span *ngIf="baby.payment_received">Paid</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
