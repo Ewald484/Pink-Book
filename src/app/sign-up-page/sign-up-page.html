@@ -1,1 +1,20 @@
-<p>sign-up-page works!</p>
+<form (submit)="SignUp()" autocomplete="new-password">
+    <h1>SignUp</h1>
+
+    <div class="form-control">
+        <label for="email">FirstName</label>
+        <input id="FirstName" autocomplete="new-password" type="text">
+    </div>
+
+    <div class="form-control">
+        <label for="email">Email</label>
+        <input id="email" autocomplete="new-password" type="email">
+    </div>
+
+    <div class="form-control">
+        <label for="password">Password</label>
+        <input id="password" autocomplete="new-password" type="password">
+    </div>
+
+    <button type="submit">SignUp &#8594;</button>
+</form>
