@@ -12,19 +12,32 @@ import { SupabaseService } from '../supabase-service';
   styleUrls: ['./baby-list.css']
 })
 export class BabyList implements OnInit {
-  babies: any[] = [];
+  public babies: any[] = [];
+  loading: boolean = false;
 
   constructor(private supabaseService: SupabaseService, private router: Router) { }
 
-  async ngOnInit() {
+  ngOnInit() {
     console.log('BabyList:ngOnInit:start');
-    await this.loadBabies();
+    this.loading = true;
+    this.loadBabies().then(babies => {
+      console.log('klaar');
+      this.babies = babies;
+      this.loading = false;
+    });
+
   }
   async loadBabies() {
-    console.log('BabyList:loadBabies:start');
-    console.log('BabyList:loadBabies:babies:before:=', this.babies);
-    this.babies = await this.supabaseService.getBabies();
-    console.log('BabyList:loadBabies:babies:after:=', this.babies);
+    try {
+      console.log('BabyList:loadBabies:start');
+      console.log('BabyList:loadBabies:babies:before:=', this.babies);
+      const babies = await this.supabaseService.getBabies();
+      console.log('BabyList:loadBabies:babies:after:=', babies);
+      return babies;
+    } catch (error) {
+      console.log('BabyList:loadBabies:error:=', error);
+      return [];
+    }
   }
   // loadBabies() {
   //   console.log('BabyList:loadBabies:start');

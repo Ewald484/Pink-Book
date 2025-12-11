@@ -3,6 +3,7 @@
 <button (click)="refreshList()">Refresh</button>
 <button (click)="goToBabyForm()">Add New Baby</button>
 {{babies.length}}
+{{loading}}
 <table>
     <thead>
         <tr>
@@ -16,8 +17,9 @@
         </tr>
     </thead>
     <tbody>
-        <!-- @for (baby of babies; track $index) { -->
-        <tr *ngFor="let baby of babies" [class.paid]="baby.payment_received">
+        @if(!loading) {
+        @for (baby of babies; track $index) {
+        <tr [class.paid]="baby.payment_received">
             <td>{{ baby.file_number }}</td>
             <td>{{ baby.first_name }}</td>
             <td>{{ baby.last_name }}</td>
@@ -32,7 +34,9 @@
 
             </td>
         </tr>
-        <!-- } -->
+        }
+        }
+
 
     </tbody>
 </table>
