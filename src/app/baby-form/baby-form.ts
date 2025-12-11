@@ -24,21 +24,33 @@ export class BabyForm {
 
   constructor(private supabaseService: SupabaseService, private router: Router) { }
 
-  async submit(event: Event) {
+  submit(event: Event) {
+    console.log('BabyForm:submit:start');
     event.preventDefault();
+    console.log('BabyForm:sumbit:1');
 
     // Auto-generate file_number
     if (!this.baby.file_number) {
       this.baby.file_number = 'BN-' + Date.now();
     }
+    console.log('BabyForm:sumbit:2');
 
     // Format dates
     this.baby.date_of_birth = new Date(this.baby.date_of_birth).toISOString().split('T')[0];
     this.baby.hearing_test_date = new Date(this.baby.hearing_test_date).toISOString().split('T')[0];
+    console.log('BabyForm:sumbit:3');
 
     try {
-      await this.supabaseService.addBaby(this.baby);
-      this.router.navigate(['/baby-list']); // go to list after adding
+      console.log('BabyForm:sumbit:4');
+
+      this.supabaseService.addBaby(this.baby).then((result) => {
+        console.log('BabyForm:sumbit: result: =', result);
+        if (result) {
+          this.router.navigate(['/baby-list']); // go to list after adding 
+        } else {
+          console.log('No data is added');
+        }
+      });
     } catch (error: any) {
       console.error('Failed to add baby:', error);
       alert('Failed to add baby. See console.');

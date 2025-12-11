@@ -1,45 +1,50 @@
 import { Injectable } from '@angular/core';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { supabase } from './supabase.client';
 
-const SUPABASE_URL = 'https://rgbtluctoguoonxvvfkn.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnYnRsdWN0b2d1b29ueHZ2ZmtuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ1OTI0NTIsImV4cCI6MjA4MDE2ODQ1Mn0.gGiMGjZ_KhV9ygXVLY0cH5ZBzI-QFfuAgXOsFgg_C1Y';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SupabaseService {
-  private supabase: SupabaseClient;
+
 
   constructor() {
-    this.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
   }
 
   // Users table
   async addUser(user: any) {
-    const { data, error } = await this.supabase.from('users').insert([user]);
+
+    const { data, error } = await supabase.from('users').insert([user]);
     if (error) throw error;
     return data;
   }
 
   // Babies table
   async getBabies() {
-    const { data, error } = await this.supabase.from('babies').select('*');
+
+    const { data, error } = await supabase.from('babies').select('*');
     if (error) throw error;
     return data;
   }
 
   async loadBabies(): Promise<any[]> {
-    return this.getBabies();
+
+    return await this.getBabies();
   }
 
   async addBaby(baby: any) {
-    const { data, error } = await this.supabase.from('babies').insert([baby]);
+
+    console.log('Supabaseservice:addbaby: baby: =', baby);
+
+    const { data, error } = await supabase.from('babies').insert([baby]).select().single();
+    console.log('Supabaseservice:addbaby: data: =', data);
     if (error) throw error;
     return data;
   }
 
   async updatePayment(id: string, paymentReceived: boolean) {
-    const { data, error } = await this.supabase
+    const { data, error } = await supabase
       .from('babies')
       .update({ payment_received: paymentReceived, closed: paymentReceived })
       .eq('id', id);

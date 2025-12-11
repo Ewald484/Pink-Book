@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { SupabaseService } from '../supabase-service';
 import { FormsModule } from '@angular/forms';
+import { SupabaseService } from '../supabase-service';
 
 @Component({
   selector: 'app-baby-list',
@@ -17,12 +17,23 @@ export class BabyList implements OnInit {
   constructor(private supabaseService: SupabaseService, private router: Router) { }
 
   async ngOnInit() {
+    console.log('BabyList:ngOnInit:start');
     await this.loadBabies();
   }
-
   async loadBabies() {
+    console.log('BabyList:loadBabies:start');
+    console.log('BabyList:loadBabies:babies:before:=', this.babies);
     this.babies = await this.supabaseService.getBabies();
+    console.log('BabyList:loadBabies:babies:after:=', this.babies);
   }
+  // loadBabies() {
+  //   console.log('BabyList:loadBabies:start');
+  //   console.log('BabyList:loadBabies:babies:before:=', this.babies);
+  //   this.supabaseService.getBabies().then((results) => {
+  //     this.babies = results;
+  //     console.log('BabyList:loadBabies:babies:after:=', this.babies);
+  //   });
+  // }
 
   goToBabyForm() {
     this.router.navigate(['/baby-form']);
