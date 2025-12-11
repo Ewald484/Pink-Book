@@ -14,11 +14,22 @@ export class SupabaseService {
     this.supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   }
 
-  // Babies CRUD
+  // Users table
+  async addUser(user: any) {
+    const { data, error } = await this.supabase.from('users').insert([user]);
+    if (error) throw error;
+    return data;
+  }
+
+  // Babies table
   async getBabies() {
     const { data, error } = await this.supabase.from('babies').select('*');
     if (error) throw error;
     return data;
+  }
+
+  async loadBabies(): Promise<any[]> {
+    return this.getBabies();
   }
 
   async addBaby(baby: any) {
@@ -32,13 +43,6 @@ export class SupabaseService {
       .from('babies')
       .update({ payment_received: paymentReceived, closed: paymentReceived })
       .eq('id', id);
-    if (error) throw error;
-    return data;
-  }
-
-  // Users table
-  async addUser(user: any) {
-    const { data, error } = await this.supabase.from('users').insert([user]);
     if (error) throw error;
     return data;
   }
